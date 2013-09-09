@@ -3,4 +3,4 @@ drizzle.js
 
 It's raining divs.
 
-![Drizzle ](https://github.com/halla/drizzle.js/blob/master/screenshot1.png "Drizzle in browser")
+![Drizzle ](screenshot1.png?raw=true "Drizzle in browser")
