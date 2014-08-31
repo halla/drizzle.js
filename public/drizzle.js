@@ -1,4 +1,5 @@
-
+var n_concurrent_items = 10;
+var items_per_sec = 2.5;
 
 words = [];
 colors = [ "black", "darkblue", "darkred", "darkgreen", "darkolivegreen", "#555", "darkorange" ]
@@ -9,9 +10,11 @@ $.get('mm.json', function(data) {
 
 divs = [];
 
-$('document').ready(function() {    
-    printTimer = setInterval(printLoop, 500);
-    cleanTimer = setInterval(cleanup, 5000);
+$('document').ready(function() {
+    var interval_new = 1000/items_per_sec;
+    var interval_clean = interval_new * n_concurrent_items;
+    printTimer = setInterval(printLoop, interval_new);
+    cleanTimer = setInterval(cleanup, interval_clean);
     $("#textareaimport").click(importTextarea);    
     $("#screen").click(function() { $("#controls").toggle();  });
 });
@@ -33,9 +36,12 @@ function genColor(div) {
 }
 
 function genPosition(div) {
+  
   var pos = function() {
-    var left = getRandomInt(0,1000);
-    var top = getRandomInt(0,750);
+    left_max = $(window).width() - 50; 
+    top_max = $(window).height() - 50; 
+    var left = getRandomInt(0, left_max);
+    var top = getRandomInt(0, top_max);
     return { "left": left, "top": top }
   }
     
